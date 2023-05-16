@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="fashion_taital">Man & Woman Fashion</h1>
+
+        <div class="fashion_section_2">
+           <div class="row">
+              {% for pr in products %}
+
+              <div class="col-lg-4 col-sm-4">
+
+                 <div class="box_main">
+
+                    <h4 class="shirt_text">{{pr.title}}</h4>
+                    <p class="price_text">Price <span style="color: #262626;">{{pr.price}}</span></p>
+                    <div class="tshirt_img"><img src="{{ pr.image.url }}"></div>
+                    <div class="btn_main">
+                       <div class="buy_bt"><a href="#">Buy Now</a></div>
+                       <div class="seemore_bt"><a href="{{ pr.get_absolute_url }}">See More</a></div>
+                    </div>
+
+                 </div>
+              </div>
+              {% endfor %}
+
+
+              
+           </div>
+        </div>
+
+
+     </div>
+
+</body>
+</html>

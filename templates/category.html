@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- {%if category %}{{category.name|title}}{% else %}Products{% endif %} -->
+
+<div>
+    <p class="fashion_taital">{{ category.name|title }}</p>
+
+</div>
+<div class="fashion_section_2">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4 col-sm-4">
+            <div class="box_main">
+                <h4 class="shirt_text">{{product.title}}</h4>
+                <p class="price_text">Price <span style="color: #262626;">{{product.price}}</span></p>
+                <div class="tshirt_img"><img src="{{ product.image.url }}"></div>
+                <div class="btn_main">
+                    <div class="buy_bt"><a href="#">Buy Now</a></div>
+                    <div class="seemore_bt"><a href="{{ product.get_absolute_url }}">See More</a></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

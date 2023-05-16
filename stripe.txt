@@ -1,0 +1,11 @@
+no auth:4242424242424242
+
+auth:4000002500003155
+
+error:4000000000009995
+
+
+
+cmd
+//stripe login
+//stripe listen

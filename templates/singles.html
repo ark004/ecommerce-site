@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>Fashion</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" type="text/css" href="{% static 'hm/css/bootstrap.min.css' %}">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="{% static 'hm/css/style.css' %}">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="{% static 'hm/css/responsive.css' %}">
+   <!-- fevicon -->
+   <link rel="icon" href="{% static 'hm/images/fevicon.png' %}" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="{% static 'hm/css/jquery.mCustomScrollbar.min.css' %}">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- fonts -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+   <!-- font awesome -->
+   <link rel="stylesheet" type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <!--  -->
+   <!-- owl stylesheets -->
+   <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext"
+      rel="stylesheet">
+   <link rel="stylesheet" href="{% static 'hm/css/owl.carousel.min.css' %}">
+   <link rel="stylesoeet" href="{% static 'hm/css/owl.theme.default.min.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+
+   <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+   <div class="container">
+
+      <div class="fashion_section_2">
+         <div class="row">
+
+
+            <div class="container">
+               <main class="pt-5">
+                  <div class="row g-3">
+                     <div class="col-md-5 col-lg-5 order-md-first bg-light">
+                        <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image"
+                           src="{{ product.image.url }}">
+
+                     </div>
+                     <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
+                        <h1 class="md-0 h4">{{product.title}}</h1>
+                        <p><span class="lead">{{product.author}}</span>(company)</p>
+                        <p>{{product.desc}}</p>
+                        <div class="border">
+                           <div class="col border-bottom">
+                              <div class="row p-3">
+                                 <div class="col-6">orginal product</div>
+
+                                 <div class="col-6 text-end"><span class="h4 fw-bold">$ {{ product.price }}</span>
+                                 </div>
+
+                                 <div class="container">
+                                    <div class="col-6">
+                                       <label for="select">Qty</label>
+                                       <select id="select">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                          <option value="5">5</option>
+
+                                       </select>
+
+                                    </div>
+
+
+                                    <!-- <a href="" class="tm-btn tm-btn-1 tm-link-to-services">ADD to cart</a> -->
+                                    <button type="button" id="add-button" value="{{product.id}}"
+                                       class="btn btn-secondary btn-sm">
+                                       ADD to cart
+
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </main>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script>
+      $(document).on('click', '#add-button', function (e) {
+         e.preventDefault();
+         console.log($('#select option:selected').text())
+         $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_add" %}',
+            data: {
+               productid: $('#add-button').val(),
+               productqty: $('#select option:selected').text(),
+               csrfmiddlewaretoken: "{{csrf_token}}",
+               action: 'post'
+            },
+            success: function (json) {
+               document.getElementById("basket-qty").innerHTML = json.qty
+
+            },
+            error: function (xhr, errmsg, err) {}
+         });
+
+      })
+   </script>
+</body>
+
+</html>
+{% endblock %}
