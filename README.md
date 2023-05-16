@@ -1,6 +1,6 @@
 # ecommerce-site
 
-Eflyer is a full function website included: user interface -->cart,category,product/account registration,login,logout(can edit password/username)payment order placed and can add items from admin side
+Eflyer is a full function website included: user interface -->cart,category,product,dashboard/account registration,login,logout(can edit password/username)payment order placed and can add items from admin side
 ,create session id 
 tech-->html,css,js and python django
 
